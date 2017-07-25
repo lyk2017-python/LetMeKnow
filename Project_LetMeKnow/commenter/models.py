@@ -2,6 +2,7 @@ from django.db import models
 
 
 class Firm(models.Model):
+    """Class for firm"""
     name = models.CharField(max_length=100, unique=True)
 
     def __str__(self):
@@ -9,6 +10,7 @@ class Firm(models.Model):
 
 
 class Product(models.Model):
+    """Class for product"""
     name = models.CharField(max_length=200)
     firm = models.ForeignKey(Firm)
 
@@ -17,6 +19,7 @@ class Product(models.Model):
 
 
 class Comment(models.Model):
+    """Class for comment"""
     title = models.CharField(max_length=100)
     product = models.ForeignKey(Product)
     message = models.TextField()
