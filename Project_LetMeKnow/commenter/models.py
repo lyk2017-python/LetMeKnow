@@ -8,12 +8,9 @@ class Firm(models.Model):
     def __str__(self):
         return "#{id} {name}".format(id=self.id, name=self.name)
 
-    def __str__(self):
-        return "#{id} {name}".format(id=self.id, name=self.name)
-
 
 class Product(models.Model):
-    """Class for product"""
+    """Class for product. it has one to many relation with Firm on firm column."""
     name = models.CharField(max_length=200)
     firm = models.ForeignKey(Firm)
 
@@ -22,7 +19,8 @@ class Product(models.Model):
 
 
 class Comment(models.Model):
-    """Class for comment"""
+    """Class for comment. This object holds the user comments, ratings and product photos.
+    product column has a relation with Product object.  """
     title = models.CharField(max_length=100)
     product = models.ForeignKey(Product)
     message = models.TextField()
@@ -31,3 +29,8 @@ class Comment(models.Model):
     creation_date = models.DateTimeField(auto_now_add=True)
     #user - will be added
     #is_published - models.BooleanField(default=False) - comments that approved by admin will be published
+
+    def __str__(self):
+        return "{} {} {} {} {}".format(title=self.title, product=self.product, message=self.message, rate=self.rate, creation_date=self.creation_date)
+
+
