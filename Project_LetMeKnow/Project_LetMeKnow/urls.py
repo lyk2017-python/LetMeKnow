@@ -19,5 +19,5 @@ from commenter.urls import urlpatterns as commenter_urls
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^commenter', include(commenter_urls)),
+    url(r'^commenter/', include(commenter_urls)),
 ]
