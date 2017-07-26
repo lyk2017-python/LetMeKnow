@@ -1,10 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Ana Sayfa</title>
 </head>
 <body>
+<h1>LetMeKnow Son Yorumlar</h1>
+{% for obj in object_list %}
+<li><a href=" {% url 'commentdetails' id=obj.id %}"> {{ obj.title }}</a> <span>{{ obj.creation_date }}</span></li>
+    <img src="{{ obj.photo }}">
+<hr/>
+{% endfor %}
 
+<h1></h1>
 </body>
 </html>

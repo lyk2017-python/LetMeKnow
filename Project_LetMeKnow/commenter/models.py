@@ -31,6 +31,6 @@ class Comment(models.Model):
     #is_published - models.BooleanField(default=False) - comments that approved by admin will be published
 
     def __str__(self):
-        return "{title} {product} {message} {rate} {creation_date}".format(self.title, self.product, self.message, self.rate, self.creation_date)
+        return "{} {} {} {} {}".format(self.title, self.product, self.message, self.rate, self.creation_date)
 
 
