@@ -5,6 +5,10 @@
     <title>Title</title>
 </head>
 <body>
-
+{% for obj in object_list %}
+    <h2>{{ obj.title }}</h2><br>
+    {{ obj.message }}<br>
+    <img src="{{ obj.photo }}"/>
+{% endfor %}
 </body>
 </html>
