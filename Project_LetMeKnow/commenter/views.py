@@ -14,7 +14,7 @@ class HomePageView(generic.ListView):
     def get_queryset(self):
         return Comment.objects.all()
 
-class DetailView(generic.DetailView):
+class CommentView(generic.DetailView):
     def get_queryset(self):
         return Comment.objects.all()
 
