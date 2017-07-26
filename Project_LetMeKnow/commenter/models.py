@@ -1,19 +1,28 @@
 from django.db import models
 
-# This object holds firm name and firm id
+
 class Firm(models.Model):
-    name = models.CharField(max_length=100)
+    """Class for firm"""
+    name = models.CharField(max_length=100, unique=True)
+
+    def __str__(self):
+        return "#{id} {name}".format(id=self.id, name=self.name)
 
     def __str__(self):
         return "#{id} {name}".format(id=self.id, name=self.name)
 
 
 class Product(models.Model):
+    """Class for product"""
     name = models.CharField(max_length=200)
     firm = models.ForeignKey(Firm)
 
+    def __str__(self):
+        return "{}".format(self.name)
+
 
 class Comment(models.Model):
+    """Class for comment"""
     title = models.CharField(max_length=100)
     product = models.ForeignKey(Product)
     message = models.TextField()
