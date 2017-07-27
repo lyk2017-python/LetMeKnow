@@ -13,10 +13,14 @@ class CommentAdmin(admin.ModelAdmin):
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-
-    pass
+    list_display = ["id", "name","firm" ]  #
+    search_fields = ["name"]  # searc attributes
+    list_display_links = ['name']  # Linked attributes
+    list_filter = ["name", "firm", ]
 
 @admin.register(Firm)
 class FirmAdmin(admin.ModelAdmin):
-
-    pass
+    list_display = ["id", "name",]  #
+    search_fields = ["name"]  # searc attributes
+    list_display_links = ['name']  # Linked attributes
+    list_filter = ["name"]

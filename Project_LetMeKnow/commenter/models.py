@@ -43,5 +43,3 @@ class Comment(models.Model):
         get_latest_by = "creation_date"
         ordering = ['title']
 
-
-
