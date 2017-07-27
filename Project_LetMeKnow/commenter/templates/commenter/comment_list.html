@@ -8,7 +8,8 @@
 
 <h1>LetMeKnow Son Yorumlar</h1>
 {% for obj in object_list %}
-<li><a href=" {% url 'commentdetails' pk=obj.pk %}"> {{ obj.title }}</a> <span>{{ obj.creation_date }}</span></li>
+<li><a href=" {% url 'commentdetails' pk=obj.pk %}"> {{ obj.title|upper }}</a> <span>{{ obj.creation_date|date:"Y-m-d" }}</span></li>
+<li> {{ obj.photo }}</li>
 <hr/>
 {% endfor %}
 

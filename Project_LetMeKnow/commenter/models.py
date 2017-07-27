@@ -8,6 +8,8 @@ class Firm(models.Model):
     def __str__(self):
         return "#{id} {name}".format(id=self.id, name=self.name)
 
+    class Meta:
+        ordering = ['name']
 
 class Product(models.Model):
     """Class for product. it has one to many relation with Firm on firm column."""
@@ -16,6 +18,10 @@ class Product(models.Model):
 
     def __str__(self):
         return "{}".format(self.name)
+
+    class Meta:
+
+        ordering = ['name']
 
 
 class Comment(models.Model):
@@ -32,5 +38,10 @@ class Comment(models.Model):
 
     def __str__(self):
         return "{} {} {} {} {}".format(self.title, self.product, self.message, self.rate, self.creation_date)
+
+    class Meta:
+        get_latest_by = "creation_date"
+        ordering = ['title']
+
 
 
