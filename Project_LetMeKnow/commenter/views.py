@@ -24,6 +24,9 @@ class SSSView(generic.TemplateView):
     template_name = "commenter/sss.html"
 
 
+class CommentDetailView(generic.DetailView):
+    model = Comment
+
 
 class CommentView(generic.CreateView):
     # form_class = CommentForm
