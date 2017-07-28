@@ -1,18 +1,10 @@
-
-
 from django.core.mail import send_mail
-
-from django.shortcuts import render
 from django.http import Http404
 from django.views import generic
-from commenter.models import *
-from django.core.mail import send_mail
-
-
-
 
 # Create your views here.
-from commenter.templates.forms import ContactForm
+from commenter.forms import ContactForm
+from commenter.models import *
 
 
 class HomePageSummaryView(generic.ListView):
@@ -34,7 +26,7 @@ class SSSView(generic.TemplateView):
 
 
 class CommentView(generic.CreateView):
-    form_class = CommentForm
+    # form_class = CommentForm
     template_name = "commenter/comment_create.html"
     success_url = "."
 
