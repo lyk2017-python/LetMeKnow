@@ -5,7 +5,6 @@ from django.core.mail import send_mail
 from django.shortcuts import render
 from django.http import Http404
 from django.views import generic
-from commenter.forms import CommentForm, ContactForm
 from commenter.models import *
 from django.core.mail import send_mail
 
@@ -32,19 +31,6 @@ class HomePageView(generic.ListView):
 class SSSView(generic.TemplateView):
     template_name = "commenter/sss.html"
 
-
-class ContactFormView(generic.FormView):
-    form_class = ContactForm
-    template_name = "commenter/contact.html"
-    success_url = "/"
-
-    def get_form_kwargs(self):
-        kwargs = super().get_form_kwargs()
-        if(self.request.method in ["POST","PUT"]):
-            post_data = kwargs["data"].copy()
-            post_data["ip"] = self.request.META["REMOTE_ADDR"]
-            kwargs["data"] = post_data
-        return kwargs
 
 
 class CommentView(generic.CreateView):
