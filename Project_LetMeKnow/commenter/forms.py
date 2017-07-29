@@ -1,6 +1,13 @@
 from django import forms
 
-from commenter.models import Comment
+from commenter.models import Comment, Product
+
+
+class ProductForm(forms.ModelForm):
+    class Meta:
+        model = Product
+        exclude = []
+
 
 
 class CommentForm(forms.ModelForm):

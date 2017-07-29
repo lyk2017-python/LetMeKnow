@@ -3,16 +3,8 @@ from django.http import Http404
 from django.views import generic
 
 # Create your views here.
-from commenter.forms import ContactForm, CommentForm
+from commenter.forms import ContactForm, CommentForm, ProductForm
 from commenter.models import *
-
-
-class HomePageSummaryView(generic.ListView):
-    model = Comment
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['summary'] = Comment.objects.filter
 
 
 class HomePageView(generic.ListView):
@@ -31,6 +23,12 @@ class CommentDetailView(generic.DetailView):
 class CommentView(generic.CreateView):
     form_class = CommentForm
     template_name = "commenter/comment_create.html"
+    success_url = "."
+
+
+class ProductView(generic.CreateView):
+    form_class = ProductForm
+    template_name = "commenter/product_create.html"
     success_url = "."
 
 
