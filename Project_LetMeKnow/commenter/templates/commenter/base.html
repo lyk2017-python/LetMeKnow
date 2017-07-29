@@ -4,9 +4,13 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
-<body>
-{% block body %}
-
-{% endblock %}
-</body>
+    <body>
+    {% block body %}
+    {% endblock %}
+         <div>
+            <a href="{% url 'home' %}">Home Page</a>
+            <a href="{% url 'commentform' %}">Add Comment</a>
+            <a href="{% url 'contactform' %}">Contact Us</a>
+        </div>
+    </body>
 </html>
