@@ -1,5 +1,6 @@
 from django.core.mail import send_mail
-from django.http import Http404
+from django.http import Http404, request, HttpResponse
+from django.shortcuts import render
 from django.views import generic
 
 # Create your views here.
@@ -23,13 +24,13 @@ class CommentDetailView(generic.DetailView):
 class CommentView(generic.CreateView):
     form_class = CommentForm
     template_name = "commenter/comment_create.html"
-    success_url = "."
+    success_url = "./success/"
 
 
 class ProductView(generic.CreateView):
     form_class = ProductForm
     template_name = "commenter/product_create.html"
-    success_url = "."
+    success_url = "./success"
 
 
 class ContactFormView(generic.FormView):
@@ -52,3 +53,11 @@ class ContactFormView(generic.FormView):
          ["tanerdurkut@gmail.com"]
         )
         return super().form_valid(form)
+
+
+def comment_success(request):
+    return render(request, 'commenter/comment_success.html')
+
+
+def product_success(request):
+    return render(request, 'commenter/product_success.html')
