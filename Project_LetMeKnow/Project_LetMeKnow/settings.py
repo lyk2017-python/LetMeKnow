@@ -124,5 +124,5 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = "media"
 
 EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
-EMAIL_FILE_PATH = os.path.join(BASE_DIR,)
+EMAIL_FILE_PATH = os.path.join(BASE_DIR, "emails")
 DEFAULT_FROM_EMAIL = "noreply@letmeknow.com"

@@ -37,7 +37,7 @@ class Comment(models.Model):
     #is_published - models.BooleanField(default=False) - comments that approved by admin will be published
 
     def __str__(self):
-        return "{} {} {} {} {}".format(self.title, self.product, self.message, self.rate, self.creation_date)
+        return "{} {}".format(self.title, self.product)
 
     class Meta:
         get_latest_by = "creation_date"
