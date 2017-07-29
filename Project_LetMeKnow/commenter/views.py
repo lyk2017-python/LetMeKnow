@@ -3,7 +3,7 @@ from django.http import Http404
 from django.views import generic
 
 # Create your views here.
-from commenter.forms import ContactForm
+from commenter.forms import ContactForm, CommentForm
 from commenter.models import *
 
 
@@ -29,29 +29,9 @@ class CommentDetailView(generic.DetailView):
 
 
 class CommentView(generic.CreateView):
-    # form_class = CommentForm
+    form_class = CommentForm
     template_name = "commenter/comment_create.html"
     success_url = "."
-
-    def get_comment(self):
-        query = Comment.objects.filter(slug=self.kwargs["slug"])
-        if query.exists():
-            return query.get()
-        else:
-            raise Http404("Category not found")
-
-    def get_form_kwargs(self):
-        kwargs = super().get_form_kwargs()
-        if self.request.method in ["POST", "PUT"]:
-            post_data = kwargs["data"].copy()
-            post_data["Comment"] = [self.get_comment()]
-            kwargs["data"] = post_data
-        return kwargs
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["object"] = self.get_comment()
-        return context
 
 
 class ContactFormView(generic.FormView):

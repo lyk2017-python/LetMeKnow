@@ -1,5 +1,16 @@
 from django import forms
 
+from commenter.models import Comment
+
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        exclude = [
+
+            "creation_date",
+        ]
+
 
 class ContactForm(forms.Form):
     email = forms.EmailField()
