@@ -69,8 +69,8 @@ class ContactFormView(generic.FormView):
          "{}\n"
          "---\n"
          "email={}\n"
-         "ip={}").format(data["message"], data["email"], data["ip"]),
+         "ip={}").format(data["message"], data["email"], self.request.META["REMOTE_ADDR"]),
          settings.DEFAULT_FROM_EMAIL,
-        ["tanerdurkut@gmail.com"]
+         ["tanerdurkut@gmail.com"]
         )
         return super().form_valid(form)

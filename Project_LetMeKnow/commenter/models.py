@@ -11,6 +11,7 @@ class Firm(models.Model):
     class Meta:
         ordering = ['name']
 
+
 class Product(models.Model):
     """Class for product. it has one to many relation with Firm on firm column."""
     name = models.CharField(max_length=200)
@@ -20,7 +21,6 @@ class Product(models.Model):
         return "{}".format(self.name)
 
     class Meta:
-
         ordering = ['name']
 
 

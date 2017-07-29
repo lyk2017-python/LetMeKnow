@@ -5,4 +5,3 @@ class ContactForm(forms.Form):
     email = forms.EmailField()
     subject = forms.CharField(max_length=50)
     message = forms.CharField(widget=forms.Textarea(attrs={"row": 2}))
-    ip = forms.GenericIPAddressField(widget=forms.HiddenInput())
