@@ -6,13 +6,14 @@
     {% endblock %} | LetMeKnow</title>
 </head>
     <body>
-    {% block body %}
-    {% endblock %}
-         <div>
+    <div>
             <a href="{% url 'home' %}">Home Page</a>
             <a href="{% url 'commentform' %}">Add Comment</a>
             <a href="{% url 'productform' %}">Add Product</a>
             <a href="{% url 'contactform' %}">Contact Us</a>
         </div>
+    {% block body %}
+    {% endblock %}
+
     </body>
 </html>
