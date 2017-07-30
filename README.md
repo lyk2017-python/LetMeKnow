@@ -4,9 +4,9 @@ Bu platform,yeni tüketicilerin önceki tüketicilerin edinmiş olduğu tecrübe
 ürünler hakkında bilgi sahibi olmalarını amaçlamaktır.
 
 LetMeKnow nasıl çalışır?
--- Kullandığı herhangi bir ürün hakkında tecrübelerini paylaşmak isteyen kullanıcılar, sisteme giriş yaparak 
+1. Kullandığı herhangi bir ürün hakkında tecrübelerini paylaşmak isteyen kullanıcılar, sisteme giriş yaparak 
 yorumunu paylaşır
--- Yeni bir ürün satın almak isteyen kullanıcılar, alacakları ürün hakkında bilgi edinmek için sistemden faydalanır.
--- Firmalar, ürünlerine yapılmış olan yorumlara cevap verebilir
--- Kayıtlı kullanıcılar daha önceki yorumları faydalı bulup bulmadığını belirtebilir.
--- Kayıt olmayan kullanıcılar sadece ürünler hakkındaki yorumları ve firma cevaplarını görebilir.
+2. Yeni bir ürün satın almak isteyen kullanıcılar, alacakları ürün hakkında bilgi edinmek için sistemden faydalanır.
+3. Firmalar, ürünlerine yapılmış olan yorumlara cevap verebilir
+4. Kayıtlı kullanıcılar daha önceki yorumları faydalı bulup bulmadığını belirtebilir.
+5. Kayıt olmayan kullanıcılar sadece ürünler hakkındaki yorumları ve firma cevaplarını görebilir.
