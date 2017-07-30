@@ -16,6 +16,8 @@ class CommentForm(forms.ModelForm):
         exclude = [
 
             "creation_date",
+            "like",
+            "dislike",
         ]
 
 

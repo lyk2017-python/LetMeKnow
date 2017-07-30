@@ -1,4 +1,6 @@
 from django.db import models
+from django.core.exceptions import ValidationError
+from django.utils.translation import ugettext_lazy as _
 
 
 class Firm(models.Model):
@@ -27,12 +29,23 @@ class Product(models.Model):
 class Comment(models.Model):
     """Class for comment. This object holds the user comments, ratings and product photos.
     product column has a relation with Product object.  """
+
+    def validate_ZeroToFive(value):
+        if value not in range(0,5):
+            raise ValidationError(
+                _('%(value)s is not in range of between 0 and 5'),
+                params={'value': value},
+            )
+
+
     title = models.CharField(max_length=100)
     product = models.ForeignKey(Product)
     message = models.TextField()
     photo = models.ImageField()
-    rate = models.PositiveSmallIntegerField(default=0)
+    rate = models.PositiveSmallIntegerField(default=0, validators=[validate_ZeroToFive])
     creation_date = models.DateTimeField(auto_now_add=True)
+    like = models.PositiveSmallIntegerField(default=0)
+    dislike = models.PositiveSmallIntegerField(default=0)
     #user - will be added
     #is_published - models.BooleanField(default=False) - comments that approved by admin will be published
 
