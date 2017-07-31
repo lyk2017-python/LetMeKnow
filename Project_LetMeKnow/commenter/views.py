@@ -9,8 +9,32 @@ from commenter.models import *
 
 
 class HomePageView(generic.ListView):
+    template_name = 'commenter/comment_list.html'
+    context_object_name = 'comment_series_list'
+    model = Comment
+
+    def get_context_data(self, **kwargs):
+        context = super(HomePageView, self).get_context_data(**kwargs)
+        context.update(
+            {
+                'product_series_list':Product.objects.order_by('name'),
+
+            }
+        )
+        return context
+
     def get_queryset(self):
         return Comment.objects.all()
+
+class ProductCommentList(generic.ListView):
+    template_name = 'commenter/product_comment_list.html'
+    context_object_name = 'product'
+    model = Comment
+
+    def get_queryset(self):
+        qs = super(ProductCommentList, self).get_queryset()
+        return qs.filter(product_id = self.kwargs['pk'])
+
 
 
 class SSSView(generic.TemplateView):
@@ -61,3 +85,7 @@ def comment_success(request):
 
 def product_success(request):
     return render(request, 'commenter/product_success.html')
+
+class LikeUpdate(generic.UpdateView):
+    model = Comment
+    fields = ['like']

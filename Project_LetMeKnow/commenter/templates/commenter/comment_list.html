@@ -1,16 +1,25 @@
 {% extends "commenter/base.html" %}
 {% block title %}Homepage{% endblock %}
 {% block body %}
+<div class="comment-container" style="border:solid 2px grey; margin:20px; padding:20px;">
 <h1>LetMeKnow Son Yorumlar</h1>
-<ul>
-{% for obj in object_list %}
-<li>
-    <a href=" {% url 'commentdetails' pk=obj.pk %}"> {{ obj.title|upper }}</a> <span>{{ obj.creation_date|date:"Y-m-d" }}</span></h1>
-</li>
-{% endfor %}
-</ul>
-<p>
 
+{% for obj in comment_series_list %}
+
+<p>    <a href=" {% url 'commentdetails' pk=obj.pk %}"> {{ obj.title }}</a> <span>{{ obj.creation_date|date:"Y-m-d" }}</span></h1></p>
+
+{% endfor %}
+
+</div>
+<div class="comment-container" style="border:solid 2px grey; margin:20px; padding:20px;">
+
+<h1>Yorum yapılmış Ürünler</h1>
+    {% for prd in product_series_list %}
+<p><a href=" {% url 'product_comment_list' pk=prd.pk %}"> {{ prd.name }} </a></p>
+
+    {% endfor %}
+</div>
+<p>
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin quis nulla non augue pulvinar finibus ut sit amet turpis. Praesent vitae erat eget nunc ornare finibus sit amet cursus mauris. Maecenas ac sapien non leo condimentum bibendum. Duis dignissim mollis tortor id pharetra. Suspendisse id semper mauris. Nunc eget ex vel ex varius gravida. Etiam bibendum est at lectus aliquam, at euismod lorem fermentum. Curabitur eleifend arcu lacinia interdum aliquet. Proin odio lacus, rutrum a enim a, auctor scelerisque ligula. In non tristique tortor. Mauris ut nisi sit amet tortor faucibus pulvinar. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vivamus mauris tellus, finibus quis interdum in, tristique vestibulum leo.
 
 Etiam aliquet ex tempus risus lobortis aliquam. Fusce placerat risus orci, at consectetur mauris facilisis sed. Vestibulum sed semper lacus. Praesent tellus magna, varius eu tempus nec, euismod eget velit. Aenean non faucibus velit. Vestibulum nunc leo, fringilla ut porttitor eget, sollicitudin at metus. Donec a faucibus elit, quis convallis nibh.
