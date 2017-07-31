@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
+from django.urls import reverse
 
 
 class Firm(models.Model):
@@ -31,9 +32,9 @@ class Comment(models.Model):
     product column has a relation with Product object.  """
 
     def validate_ZeroToFive(value):
-        if value not in range(0,5):
+        if value not in range(1,6):
             raise ValidationError(
-                _('%(value)s is not in range of between 0 and 5'),
+                _('%(value)s is not in range of between 1 and 5 (included)'),
                 params={'value': value},
             )
 

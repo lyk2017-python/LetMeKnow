@@ -1,6 +1,8 @@
 from django.conf.urls import url
 from commenter.views import HomePageView, CommentDetailView, SSSView, ContactFormView, CommentView, ProductView, \
-    comment_success, product_success
+    comment_success, product_success, LikeUpdate, ProductCommentList
+
+appname = 'commenter'
 
 urlpatterns = [
     url(r'^$', HomePageView.as_view(), name='home'),
@@ -11,6 +13,7 @@ urlpatterns = [
     url(r'^product/$', ProductView.as_view(), name="productform"),
     url(r'^comment/success/$', comment_success),
     url(r'^product/success/$', product_success),
-
+    url(r'^detail/(?P<pk>[0-9]+)/$', LikeUpdate.as_view(), name='like-update'),
+    url(r'^product/(?P<pk>\d+)$', ProductCommentList.as_view(), name='product_comment_list'),
 ]
 
