@@ -13,3 +13,12 @@ function init() {
     });
 }
 window.onload = init();
+
+
+
+$(function() {
+      $("#lava_menu").lavaLamp({
+        fx: "linear",
+        speed: 300
+      });
+    });

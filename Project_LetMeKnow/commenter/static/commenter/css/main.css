@@ -69,17 +69,20 @@ header {
     float: right;
     margin-right:20px;
     }
+    header nav ul li.current a:hover{
+    color:#024b58;
+    }
     header nav a {
       line-height: 150px;
       margin-left: 20px;
-      color: #bee5ec;
       font-size: 18px;
+      color: #bee5ec;
       -webkit-transition: all 0.3s;
       -moz-transition: all 0.3s;
       -ms-transition: all 0.3s;
       -o-transition: all 0.3s;
       transition: all 0.3s; }
-      header nav a:hover, header h1#logo a:hover  {
+      header h1#logo a:hover  {
         color: white; }
   header.smaller {
     height: 75px; }
@@ -170,7 +173,7 @@ body{
 }
 
 .color1{
-color:#33cccc;
+color:#bee5ec;
 }
 .color2{
 color:#c2f0f0;
@@ -180,3 +183,44 @@ color:#c2f0f0;
    color:#239090;
 }
 
+.lavaLampWithImage {
+  position: relative;
+  height: 100px;
+  padding: 15px 5px 15px 0;
+  margin: 10px 0 0 0;
+  overflow: hidden;
+  float: right;
+}
+
+.lavaLampWithImage li {
+  float: left;
+  list-style: none;
+  max-width: auto
+}
+
+.lavaLampWithImage li.back {
+  background: #7fc1ce;
+  height: 80px;
+  z-index: 8;
+  position: absolute;
+  margin:10px 4px 4px 4px;
+}
+
+.lavaLampWithImage li a {
+  text-decoration: none;
+  outline: none;
+  text-align: center;
+  letter-spacing: 0;
+  z-index: 10;
+  display: block;
+  float: left;
+  line-height: 75px;
+  padding: 12px 0px 0 3px;
+  position: relative;
+  overflow: hidden;
+  margin: auto 16px;
+}
+
+.lavaLampWithImage li a:hover, .lavaLampWithImage li a:active, .lavaLampWithImage li a:visited {
+  border: none;
+}
