@@ -3,7 +3,7 @@ from django.http import Http404, request, HttpResponse, JsonResponse
 from django.shortcuts import render, get_object_or_404
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
-from commenter.forms import ContactForm, CommentForm, ProductForm
+from commenter.forms import ContactForm, CommentForm, ProductForm, CustomUserCreationForm
 from commenter.models import *
 from django.db.models import F
 from django.utils.decorators import method_decorator
@@ -120,7 +120,11 @@ def comment_success(request):
 def product_success(request):
     return render(request, 'commenter/product_success.html')
 
-"""This class increases like clicks for a given comment"""
-class LikeUpdate(generic.UpdateView):
-    model = Comment
-    fields = ['like']
+class RegistrationView(generic.FormView):
+    form_class = CustomUserCreationForm
+    template_name = "commenter/signup.html"
+    success_url = "/"
+
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)

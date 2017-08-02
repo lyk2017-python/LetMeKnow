@@ -29,7 +29,7 @@
                     <li><a href=""><i class="fa fa-comments fa-fw" aria-hidden="true"></i>Comment</a></li>
                 {% else %}
                      <li><a href="{% url 'login' %}"><i class="fa fa-sign-in fa-fw" aria-hidden="true"></i>Login</a></li>
-                    <li><a href=""><i class="fa fa-user-circle fa-fw" aria-hidden="true"></i>Sign up</a></li>
+                    <li><a href="{% url 'register' %}"><i class="fa fa-user-circle fa-fw" aria-hidden="true"></i>Sign up</a></li>
                 {% endif %}
 
 
