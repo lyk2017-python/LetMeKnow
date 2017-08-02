@@ -1,0 +1,12 @@
+{% extends "commenter/base.html" %}
+{% block title %}Login{% endblock %}
+{% block body %}
+
+
+<form action="." method="POST">
+    {% csrf_token %}
+    <input type="hidden" name="next" value="/">
+    {{ form.as_p }}
+    <button type="submit">Logout</button>
+</form>
+{% endblock %}

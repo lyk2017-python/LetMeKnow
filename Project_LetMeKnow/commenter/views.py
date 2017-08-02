@@ -1,13 +1,46 @@
 from django.core.mail import send_mail
-from django.http import Http404, request, HttpResponse
-from django.shortcuts import render
+from django.http import Http404, request, HttpResponse, JsonResponse
+from django.shortcuts import render, get_object_or_404
 from django.views import generic
-
-# Create your views here.
+from django.contrib.auth.mixins import LoginRequiredMixin
 from commenter.forms import ContactForm, CommentForm, ProductForm
 from commenter.models import *
+from django.db.models import F
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
 
 
+
+class LoginCreateView(LoginRequiredMixin, generic.CreateView):
+    pass
+
+def like(request):
+    id = request.POST.get("id", default=None)
+    like = request.POST.get("like")
+    obj = get_object_or_404(Comment, id=int(id))
+    if like == "true":
+        obj.like = F("like") + 1
+        obj.save(update_fields=["like"])
+
+    else:
+        return HttpResponse(status=400)
+    obj.refresh_from_db()
+    return JsonResponse({"like": obj.like, "id": id})
+
+def dislike(request):
+    id = request.POST.get("id", default=None)
+    dislike = request.POST.get("dislike")
+    obj = get_object_or_404(Comment, id=int(id))
+    if dislike == "true":
+        obj.dislike = F("dislike") + 1
+        obj.save(update_fields=["dislike"])
+
+    else:
+        return HttpResponse(status=400)
+    obj.refresh_from_db()
+    return JsonResponse({"dislike": obj.dislike, "id": id})
+
+"""This class lists latest comments and most commented products"""
 class HomePageView(generic.ListView):
     template_name = 'commenter/comment_list.html'
     context_object_name = 'comment_series_list'
@@ -26,6 +59,7 @@ class HomePageView(generic.ListView):
     def get_queryset(self):
         return Comment.objects.all()
 
+"""This class lists  all comments for a given product"""
 class ProductCommentList(generic.ListView):
     template_name = 'commenter/product_comment_list.html'
     context_object_name = 'product'
@@ -40,23 +74,23 @@ class ProductCommentList(generic.ListView):
 class SSSView(generic.TemplateView):
     template_name = "commenter/sss.html"
 
-
+"""This class gives all details of a singe comment"""
 class CommentDetailView(generic.DetailView):
     model = Comment
 
-
-class CommentView(generic.CreateView):
+"""This class creates new comment"""
+class CommentView(LoginCreateView):
     form_class = CommentForm
     template_name = "commenter/comment_create.html"
     success_url = "./success/"
 
-
+"""This clas creates ne product"""
 class ProductView(generic.CreateView):
     form_class = ProductForm
     template_name = "commenter/product_create.html"
     success_url = "./success"
 
-
+"""This class creates contact message and writes it to disk"""
 class ContactFormView(generic.FormView):
     form_class = ContactForm
     template_name = "commenter/contact.html"
@@ -86,6 +120,7 @@ def comment_success(request):
 def product_success(request):
     return render(request, 'commenter/product_success.html')
 
+"""This class increases like clicks for a given comment"""
 class LikeUpdate(generic.UpdateView):
     model = Comment
     fields = ['like']

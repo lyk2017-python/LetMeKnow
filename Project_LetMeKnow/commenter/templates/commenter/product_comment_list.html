@@ -4,21 +4,70 @@
 
 
 {% for comments in product %}
-<div class="comment-container" style="border:solid 2px grey; margin:20px; padding:20px;">
-    <div style="background:#e0e0c0; padding:10px">
+<div class="container">
+    <div class="row">
+        <div class="comment-container" style=" margin:20px; padding:20px;">
 
-        <img src="{{ comments.photo.url }}" style="width:100px; border:1px silver #000; float:left; margin:10px"/>
-        <h3>{{ comments.product }} - {{ comments.title }}</h3>
-        <p>{{ comments.message }}</p>
+            <div style="background:#e0e0c0; padding:10px">
 
-    </div>
+                <img src="{{ comments.photo.url }}" style="width:100px; float:left; margin:10px"/>
+                <h3>{{ comments.product }} - {{ comments.title }}</h3>
+                <p>{{ comments.message }}</p>
 
-    <div>
-
-        <p style="color:blue">Bu yorumu faydalı buluyor musunuz?</p>
-        <p><input type="button" value="Faydalı Buldum"> <input type="button" value="Faydalı Bulmadım"></p>
-
+            </div>
+        </div>
     </div>
 </div>
+
+<div class="container">
+    <div class="row">
+
+        <p style="color:blue">Bu yorumu faydalı buluyor musunuz?</p>
+
+        <span id="like_{{ comments.id }}">{{comments.like}}</span>
+        <button onclick="like(true, {{ comments.id }})">
+            <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+            Evet
+        </button>&nbsp;&nbsp;
+        <span id="dislike_{{ comments.id }}">{{comments.dislike}}</span>
+        <button onclick="dislike(true, {{ comments.id }})">
+            <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
+            Evet
+        </button>
+    </div>
+</div>
+
 {% endfor %}
+
+
+
+<script>
+    function like(param, id) {
+        $.post({
+            data: {
+                "like": param,
+                "id": id,
+                "csrfmiddlewaretoken": getCookie('csrftoken')
+            },
+            url: "{% url "like_dislike" %}",
+            success: function (data) {
+                $("#like_"+data.id).text(data.like)
+            }
+        })
+    }
+
+    function dislike(param, id) {
+        $.post({
+            data: {
+                "dislike": param,
+                "id": id,
+                "csrfmiddlewaretoken": getCookie('csrftoken')
+            },
+            url: "{% url "dislike" %}",
+            success: function (data) {
+                $("#dislike_"+data.id).text(data.dislike)
+            }
+        })
+    }
+</script>
 {% endblock %}
