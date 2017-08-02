@@ -6,11 +6,12 @@ function init() {
         if (distanceY > shrinkOn) {
             classie.add(header,"smaller");
         } else {
+
             if (classie.has(header,"smaller")) {
                 classie.remove(header,"smaller");
             }
         }
-    });
+        document.getElementsByClassName("back")[0].style.width = document.getElementsByClassName("current")[0].offsetWidth +"px";   });
 }
 window.onload = init();
 

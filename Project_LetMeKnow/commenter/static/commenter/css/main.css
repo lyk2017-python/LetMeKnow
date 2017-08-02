@@ -92,7 +92,7 @@ header {
       margin:0 0 0 20px;
       font-size: 30px; }
     header.smaller nav a {
-      line-height: 75px;
+      line-height: 70px;
       font-size:16px;
        }
 
@@ -157,7 +157,7 @@ header {
 
 
 a {
-    text-decoration:none;
+    text-decoration:none !important;
     /*color:#bee5ec*/
     color:#0b7386;
 }
@@ -193,10 +193,24 @@ color:#c2f0f0;
   float: right;
 }
 
+header.smaller .lavaLampWithImage{
+    margin:0;
+    height:70px;
+    padding:0 5px 15px 0;
+    margin-top:-10px;
+}
+
 .lavaLampWithImage li {
   float: left;
   list-style: none;
   max-width: auto
+}
+
+header.smaller .lavaLampWithImage{
+    margin:0;
+    height:85px;
+    padding:0 5px 15px 0;
+    margin-top:-10px;
 }
 
 .lavaLampWithImage li.back {
