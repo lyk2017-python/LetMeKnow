@@ -3,10 +3,6 @@ function init() {
         var distanceY = window.pageYOffset || document.documentElement.scrollTop,
             shrinkOn = 80,
             header = document.querySelector("header");
-            var curr = document.getElementsByClassName("current");
-            var back = document.getElementsByClassName("back");
-            var firstBig = back[0].offsetWidth; //143
-            var smalX = curr[0].offsetWidth; //143
         if (distanceY > shrinkOn) {
             classie.add(header,"smaller");
         } else {
