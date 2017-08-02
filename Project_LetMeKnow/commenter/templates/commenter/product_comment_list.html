@@ -15,10 +15,51 @@
 
     <div>
 
-        <p style="color:blue">Bu yorumu faydalı buluyor musunuz?</p>
-        <p><input type="button" value="Faydalı Buldum"> <input type="button" value="Faydalı Bulmadım"></p>
+
+<div>
+
+    <p style="color:blue">Bu yorumu faydalı buluyor musunuz?</p>
+
+    <span id="like_{{ comments.id }}">{{comments.like}}</span>
+    <button onclick="like(true, {{ comments.id }})">Evet</button>
+    <span id="dislike_{{ comments.id }}">{{comments.dislike}}</span>
+    <button onclick="dislike(true, {{ comments.id }})">Hayır</button>
+
+</div>
 
     </div>
 </div>
 {% endfor %}
+
+
+
+<script>
+    function like(param, id) {
+        $.post({
+            data: {
+                "like": param,
+                "id": id,
+                "csrfmiddlewaretoken": getCookie('csrftoken')
+            },
+            url: "{% url "like_dislike" %}",
+            success: function (data) {
+                $("#like_"+data.id).text(data.like)
+            }
+        })
+    }
+
+    function dislike(param, id) {
+        $.post({
+            data: {
+                "dislike": param,
+                "id": id,
+                "csrfmiddlewaretoken": getCookie('csrftoken')
+            },
+            url: "{% url "dislike" %}",
+            success: function (data) {
+                $("#dislike_"+data.id).text(data.dislike)
+            }
+        })
+    }
+</script>
 {% endblock %}

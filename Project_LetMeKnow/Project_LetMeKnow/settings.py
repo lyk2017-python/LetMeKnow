@@ -56,7 +56,7 @@ ROOT_URLCONF = 'Project_LetMeKnow.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, "templates")],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -100,7 +100,7 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
+#AUTH_USER_MODEL = "commenter.User"
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
@@ -126,3 +126,5 @@ MEDIA_ROOT = "media"
 EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 EMAIL_FILE_PATH = os.path.join(BASE_DIR, "emails")
 DEFAULT_FROM_EMAIL = "noreply@letmeknow.com"
+
+LOGIN_REDIRECT_URL ="/"

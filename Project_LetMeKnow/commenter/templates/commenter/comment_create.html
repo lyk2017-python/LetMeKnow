@@ -2,9 +2,12 @@
 {% block title %}New comment{% endblock %}
 {% block body %}
 <hr>
-<form action="." method="POST" enctype="multipart/form-data">
-{% csrf_token %}
-{{form.as_p}}
-    <button type="submit">Save</button>
-</form>
+{% if request.user.is_authenticated %}
+    <form action="." method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{form.as_p}}
+        <button type="submit">Save</button>
+    </form>
+
+{% endif %}
 {% endblock %}
