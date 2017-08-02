@@ -6,11 +6,13 @@
     <title>{% block title %}
     {% endblock %} | LetMeKnow</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'commenter/css/main.css' %}" type="text/css" />
+
     <link rel="stylesheet" href="{% static 'commenter/css/normalize.css' %}" type="text/css" />
     <link rel="stylesheet" href="{% static 'commenter/css/font-awesome.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'commenter/css/bootstrap.min.css' %}" type="text/css">
 
     <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'commenter/css/main.css' %}" type="text/css" />
 
 </head>
     <body>
@@ -38,18 +40,25 @@
         </nav>
     </div>
 </header><!-- /header -->
-
-    <div style="margin:220px 0"></div>
-    <div>
-            <a href="{% url 'commentform' %}">Add Comment</a>
-            <a href="{% url 'productform' %}">Add Product</a>
-            <a href="{% url 'contactform' %}">Contact Us</a>
+<div class="container" style="padding:20px;">
+    <div class="row">
+       <ul class="nav nav-tabs">
+          <li role="presentation" class="active"><a href="{% url 'commentform' %}">Add Comment</a></li>
+          <li role="presentation"><a href="{% url 'productform' %}">Add Product</a></li>
+          <li role="presentation"><a href="{% url 'contactform' %}">Contact Us</a></li>
+        </ul>
     </div>
+</div>
+
     {% block body %}
+
+
     {% endblock %}
-    <script src="{% static 'commenter/js/jquery-3.2.1.min.js' %}"></script>
+
     <script src="{% static 'commenter/js/main.js' %}"></script>
     <script src="{% static 'commenter/js/classie.js' %}"></script>
     <script src="{% static 'commenter/js/jquery.lavalamp.min.js' %}"></script>
+    <script src="{% static 'commenter/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'commenter/js/jquery-3.2.1.min.js' %}"></script>
     </body>
 </html>

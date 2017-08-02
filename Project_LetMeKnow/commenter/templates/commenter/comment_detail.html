@@ -1,24 +1,34 @@
 {% extends "commenter/base.html" %}
 {% block title %}Comment #{{ object.id }}{% endblock %}
 {% block body %}
+<div class="container">
+    <div class="row">
+        <div style="background:#c0c0c0; padding:10px">
 
-<div style="background:#c0c0c0; padding:10px">
+            <img src="{{ object.photo.url }}" style="width:100px; border:1px solid #000; float:left; margin:5px 10px 0 0"/>
+            <h3>{{ object.title |truncatechars:50 }}</h3>
+            <p>{{ object.message }}</p>
 
-    <img src="{{ object.photo.url }}" style="width:100px; border:1px solid #000; float:left; margin:5px 10px 0 0"/>
-    <h3>{{ object.title |truncatechars:50 }}</h3>
-    <p>{{ object.message }}</p>
-
+        </div>
+    </div>
 </div>
 
-<div>
+<div class="container">
+    <div class="row">
 
-    <p style="color:blue">Bu yorumu faydalı buluyor musunuz?</p>
+        <p style="color:blue">Bu yorumu faydalı buluyor musunuz?</p>
 
-    <span id="like_{{ object.id }}">{{object.like}}</span>
-    <button onclick="like(true, {{ object.id }})">Evet</button>
-    <span id="dislike_{{ object.id }}">{{object.dislike}}</span>
-    <button onclick="dislike(true, {{ object.id }})">Hayır</button>
-
+        <span id="like_{{ object.id }}">{{object.like}}</span>
+        <button onclick="like(true, {{ object.id }})">
+            <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+            Evet
+        </button>&nbsp;&nbsp;
+        <span id="dislike_{{ object.id }}">{{object.dislike}}</span>
+        <button onclick="dislike(true, {{ object.id }})">
+            <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
+            Evet
+        </button>
+    </div>
 </div>
 
 
