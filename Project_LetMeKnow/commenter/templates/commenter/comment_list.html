@@ -6,7 +6,7 @@
 
 {% for obj in comment_series_list %}
 
-<p>    <a href=" {% url 'commentdetails' pk=obj.pk %}"> {{ obj.title }}</a> <span>{{ obj.creation_date|date:"Y-m-d" }}</span></h1></p>
+<p><a href=" {% url 'commentdetails' pk=obj.pk %}"> {{ obj.title }}</a> <span>{{ obj.creation_date|date:"Y-m-d" }}</span></h1></p>
 
 {% endfor %}
 

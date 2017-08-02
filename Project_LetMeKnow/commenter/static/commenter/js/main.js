@@ -11,18 +11,9 @@ function init() {
                 classie.remove(header,"smaller");
             }
         }
-        document.getElementsByClassName("back")[0].style.width = document.getElementsByClassName("current")[0].offsetWidth +"px";   });
+    });
 }
 window.onload = init();
-
-
-
-$(function() {
-      $("#lava_menu").lavaLamp({
-        fx: "linear",
-        speed: 300
-      });
-    });
 
 
 function getCookie(name) {
