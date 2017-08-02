@@ -15,8 +15,7 @@
 
 <h1>Yorum yapılmış Ürünler</h1>
     {% for prd in product_series_list %}
-<p><a href=" {% url 'product_comment_list' pk=prd.pk %}"> {{ prd.name }} </a></p>
-
+<p><a href=" {% url 'product_comment_list' pk=prd.pk %}"> {{ prd.product.name }} </a></p>
     {% endfor %}
 </div>
 <p>

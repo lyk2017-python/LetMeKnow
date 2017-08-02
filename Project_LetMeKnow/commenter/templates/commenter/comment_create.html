@@ -1,18 +1,25 @@
 {% extends "commenter/base.html" %}
+{% load bootstrap3 %}
 {% block title %}New comment{% endblock %}
 {% block body %}
-<hr>
 {% if request.user.is_authenticated %}
+<div class="container ">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+                    <h2>Add your comments</h2>
+            <hr>
 
-
-    <form action="." method="POST" enctype="multipart/form-data">
-    <div class="form-group">
-    {% csrf_token %}
-    {{form.as_p}}
-        <button class="btn btn-primary" type="submit">Save</button>
+                <form action="." method="post" class="form" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% bootstrap_form form %}
+                    {% buttons %}
+                        <button type="submit" class="btn btn-primary">
+                            {% bootstrap_icon "send" %} Submit
+                        </button>
+                    {% endbuttons %}
+                </form>
+        </div>
     </div>
-    </form>
-
-
+</div>
 {% endif %}
 {% endblock %}

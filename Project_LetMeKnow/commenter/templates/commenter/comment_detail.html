@@ -3,32 +3,34 @@
 {% block body %}
 <div class="container">
     <div class="row">
-        <div style="background:#c0c0c0; padding:10px">
+        <div class="comment_box">
+            <h3>Comment for <a href="{% url 'product_comment_list' pk=object.product.pk %}">{{ object.product.name }}</a></h3>
+            <img src="{{ object.photo.url }}" class="pull-left" style="width:20%; "/>
+            <div>
+                <h3>{{ object.title |truncatechars:50 }}</h3>
+                <p>{{ object.message }}</p>
+            </div>
+            <div style="clear: both;"></div>
 
-            <img src="{{ object.photo.url }}" style="width:100px; border:1px solid #000; float:left; margin:5px 10px 0 0"/>
-            <h3>{{ object.title |truncatechars:50 }}</h3>
-            <p>{{ object.message }}</p>
+        </div>
+
+        <div class="like_box">
+            <div style="padding:10px; background:rgba(127, 194, 206, .5);margin-top:1px">
+                <p class="question"><i class="fa fa-question-circle" aria-hidden="true"></i>
+    Bu yorumu faydalı buluyor musunuz?</p>
+                    <span id="like_{{ object.id }}">{{object.like}}</span>
+                <a class="btn" onclick="like(true, {{ object.id }})">
+                    <i class="fa fa-thumbs-o-up fa-2x " aria-hidden="true"></i>
+                </a>&nbsp;
+                <span id="dislike_{{ object.id }}">{{object.dislike}}</span>
+                <a class="btn" onclick="dislike(true, {{ object.id }})">
+                    <i class="fa fa-thumbs-o-down fa-2x " aria-hidden="true"></i>
+                </a>&nbsp;&nbsp;
+            </div>
 
         </div>
     </div>
-</div>
 
-<div class="container">
-    <div class="row">
-
-        <b> <p style="color:#660000 ">Bu yorumu faydalı buluyor musunuz?</p> </b>
-
-        <span id="like_{{ object.id }}">{{object.like}}</span>
-        <a onclick="like(true, {{ object.id }})">
-            <i class="fa fa-thumbs-o-up fa-2x " style="color: #660000" aria-hidden="true"></i>
-
-        </a>&nbsp;&nbsp;
-        <span id="dislike_{{ object.id }}">{{object.dislike}}</span>
-        <a onclick="dislike(true, {{ object.id }})">
-            <i class="fa fa-thumbs-o-down fa-2x" style="color: #660000" aria-hidden="true"></i>
-
-        </a>
-    </div>
 </div>
 
 

@@ -38,7 +38,6 @@ class Comment(models.Model):
                 params={'value': value},
             )
 
-
     title = models.CharField(max_length=100)
     product = models.ForeignKey(Product)
     message = models.TextField()
@@ -47,8 +46,8 @@ class Comment(models.Model):
     creation_date = models.DateTimeField(auto_now_add=True)
     like = models.PositiveSmallIntegerField(default=0)
     dislike = models.PositiveSmallIntegerField(default=0)
-    #user - will be added
-    #is_published - models.BooleanField(default=False) - comments that approved by admin will be published
+    # user - will be added
+    # is_published - models.BooleanField(default=False) - comments that approved by admin will be published
 
     def __str__(self):
         return "{} {}".format(self.title, self.product)

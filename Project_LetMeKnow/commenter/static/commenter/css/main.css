@@ -239,3 +239,20 @@ header.smaller .lavaLampWithImage{
 .lavaLampWithImage li a:hover, .lavaLampWithImage li a:active, .lavaLampWithImage li a:visited {
   border: none;
 }
+
+
+.like_box{
+    color:#0F5866;
+    font-weight:bold;
+}
+
+.comment_box{
+    background-color:#7FC1CE;
+    padding:10px;
+}
+.comment_box img{
+    border:1px solid #000; float:left; margin:5px 10px 0 0;
+}
+.like_box a:hover{
+    cursor:pointer;
+}

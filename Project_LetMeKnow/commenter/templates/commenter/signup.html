@@ -1,14 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<form action="" method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Signup</button>
-</form>
-</body>
-</html>
+{% extends "commenter/base.html" %}
+{% load bootstrap3 %}
+{% block title %}
+Sign Up
+{% endblock %}
+{% block body %}
+<div class="container ">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+                <form action="." method="post" class="form">
+                    {% csrf_token %}
+                    {% bootstrap_form form %}
+                   {% buttons %}
+                        <button type="submit" class="btn btn-primary">
+                            {% bootstrap_icon "star" %} Submit
+                        </button>
+                    {% endbuttons %}
+                </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

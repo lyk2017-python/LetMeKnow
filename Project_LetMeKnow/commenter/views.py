@@ -50,7 +50,7 @@ class HomePageView(generic.ListView):
         context = super(HomePageView, self).get_context_data(**kwargs)
         context.update(
             {
-                'product_series_list':Product.objects.order_by('name'),
+                'product_series_list': Comment.objects.all().order_by('product'),
 
             }
         )

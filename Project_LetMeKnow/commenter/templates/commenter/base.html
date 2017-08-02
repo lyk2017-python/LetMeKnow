@@ -16,7 +16,7 @@
 </head>
     <body>
     <header>
-    <div class="container clearfix">
+    <div class="container">
         <h1 id="logo">
              <a href="{% url 'home' %}">let me know</a>
         </h1>
@@ -26,7 +26,7 @@
                 {% if request.user.is_authenticated %}
                     <li><a href=""><i class="fa fa-user-circle fa-fw" aria-hidden="true"></i>{{ request.user.username }}</a></li>
                     <li><a href="{% url 'logout' %}"><i class="fa fa-sign-out fa-fw" aria-hidden="true"></i>Logout</a></li>
-                    <li><a href=""><i class="fa fa-comments fa-fw" aria-hidden="true"></i>Comment</a></li>
+                    <li><a href="{% url 'commentform' %}"><i class="fa fa-comments fa-fw" aria-hidden="true"></i>Comment</a></li>
                 {% else %}
                      <li><a href="{% url 'login' %}"><i class="fa fa-sign-in fa-fw" aria-hidden="true"></i>Login</a></li>
                     <li><a href="{% url 'register' %}"><i class="fa fa-user-circle fa-fw" aria-hidden="true"></i>Sign up</a></li>
