@@ -22,18 +22,22 @@
 <div class="container">
     <div class="row">
 
-        <p style="color:blue">Bu yorumu faydalı buluyor musunuz?</p>
+        <b> <p style="color:#660000 ">Bu yorumu faydalı buluyor musunuz?</p> </b>
 
         <span id="like_{{ comments.id }}">{{comments.like}}</span>
-        <button onclick="like(true, {{ comments.id }})">
-            <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
-            Evet
-        </button>&nbsp;&nbsp;
+        <a onclick="like(true, {{ comments.id }})">
+           <i class="fa fa-thumbs-o-up fa-2x " style="color: #660000" aria-hidden="true"></i>
+
+
+
+        </a>&nbsp;&nbsp;
         <span id="dislike_{{ comments.id }}">{{comments.dislike}}</span>
-        <button onclick="dislike(true, {{ comments.id }})">
-            <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
-            Evet
-        </button>
+        <a onclick="dislike(true, {{ comments.id }})">
+           <i class="fa fa-thumbs-o-down fa-2x" style="color: #660000" aria-hidden="true"></i>
+
+
+
+        </a>
     </div>
 </div>
 
