@@ -157,7 +157,7 @@ header {
 
 
 a {
-    text-decoration:none;
+    text-decoration:none !important;
     /*color:#bee5ec*/
     color:#0b7386;
 }
@@ -204,6 +204,13 @@ header.smaller .lavaLampWithImage{
   float: left;
   list-style: none;
   max-width: auto
+}
+
+header.smaller .lavaLampWithImage{
+    margin:0;
+    height:85px;
+    padding:0 5px 15px 0;
+    margin-top:-10px;
 }
 
 .lavaLampWithImage li.back {
