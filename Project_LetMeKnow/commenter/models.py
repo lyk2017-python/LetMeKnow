@@ -1,7 +1,8 @@
 from django.db import models
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
-from django.urls import reverse
+from django.contrib.auth.models import User
+from django.utils import timezone
 
 
 class Firm(models.Model):
@@ -46,13 +47,18 @@ class Comment(models.Model):
     creation_date = models.DateTimeField(auto_now_add=True)
     like = models.PositiveSmallIntegerField(default=0)
     dislike = models.PositiveSmallIntegerField(default=0)
-    # user - will be added
+    user = models.ForeignKey(User)
     # is_published - models.BooleanField(default=False) - comments that approved by admin will be published
 
     def __str__(self):
         return "{} {}".format(self.title, self.product)
 
+
+
     class Meta:
         get_latest_by = "creation_date"
         ordering = ['-creation_date']
 
+    def save(self, *args, **kwargs):
+        self.creation_date = timezone.now()
+        return super(Comment,self).save(*args,**kwargs)

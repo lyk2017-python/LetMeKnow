@@ -171,6 +171,7 @@ a:active{
 body{
     font-family:"Lato","Helvetica Neue","Helvetica",Helvetica,Arial,sans-serif;
     margin-top:170px;
+    background-color: rgba(47, 141, 157, 0.1);
 }
 
 .color1{
@@ -244,15 +245,71 @@ header.smaller .lavaLampWithImage{
 .like_box{
     color:#0F5866;
     font-weight:bold;
+    background:#bee5ec;
+;
+    padding:10px;
+}
+.like_box p.question{
 }
 
 .comment_box{
-    background-color:#7FC1CE;
-    padding:10px;
+    position:relative;
+}
+.comment_box h3{
+    margin:10px 0;
 }
 .comment_box img{
-    border:1px solid #000; float:left; margin:5px 10px 0 0;
+    border:1px solid #0F5866; float:left; margin:5px 10px 10px 0;
+    padding:1px;
+    background-color:#0f5866;
+    width:200px;
+    height:auto;
+
 }
 .like_box a:hover{
     cursor:pointer;
+}
+
+.timeinfo{
+    position:absolute;
+    top:-10px;
+    right:0px;
+    padding:10px;
+    background:#bee5ec;
+    color:#0F5866;
+;
+}
+
+.like_thumb{
+    display:inline-block;
+    margin-right:5px;
+ }
+ .like_thumb a{
+    padding:0;
+ }
+ .like_thumb span{
+    padding:0 5px;
+    height:40px;
+    display:inline-block;
+    line-height:40px;
+ }
+
+ footer{
+    padding: 0;
+    margin-top:50px;
+ }
+
+ #p_quote{
+    margin: 0 10px 0px 0;
+ }
+
+#social{
+    background-color:#2f8c9d;
+}
+#footer_last{
+    font-size:1.3em;
+    padding:20px;
+}
+#footer_last a{
+    margin:0 5px;
 }

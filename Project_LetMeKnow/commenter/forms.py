@@ -14,7 +14,7 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         exclude = [
-
+            "user",
             "creation_date",
             "like",
             "dislike",

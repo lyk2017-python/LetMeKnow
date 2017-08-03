@@ -5,7 +5,7 @@ from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
 from commenter.forms import ContactForm, CommentForm, ProductForm, CustomUserCreationForm
 from commenter.models import *
-from django.db.models import F
+from django.db.models import F, Count
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 
@@ -26,6 +26,7 @@ def like(request):
         return HttpResponse(status=400)
     obj.refresh_from_db()
     return JsonResponse({"like": obj.like, "id": id})
+
 
 def dislike(request):
     id = request.POST.get("id", default=None)
@@ -50,8 +51,7 @@ class HomePageView(generic.ListView):
         context = super(HomePageView, self).get_context_data(**kwargs)
         context.update(
             {
-                'product_series_list': Comment.objects.all().order_by('product'),
-
+                'product_series_list': Comment.objects.values("product__name","product__id").annotate(toplam = Count("product", distinct=True))
             }
         )
         return context
@@ -84,7 +84,12 @@ class CommentView(LoginCreateView):
     template_name = "commenter/comment_create.html"
     success_url = "./success/"
 
-"""This clas creates ne product"""
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super(LoginCreateView, self).form_valid(form)
+
+
+"""This class creates new product"""
 class ProductView(generic.CreateView):
     form_class = ProductForm
     template_name = "commenter/product_create.html"
@@ -120,10 +125,15 @@ def comment_success(request):
 def product_success(request):
     return render(request, 'commenter/product_success.html')
 
+
+def signup_success(request):
+    return render(request, 'commenter/signup_success.html')
+
+
 class RegistrationView(generic.FormView):
     form_class = CustomUserCreationForm
     template_name = "commenter/signup.html"
-    success_url = "/"
+    success_url = "./success/"
 
     def form_valid(self, form):
         form.save()

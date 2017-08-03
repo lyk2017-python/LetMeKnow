@@ -2,30 +2,37 @@
 {% block title %}Comment #{{ object.id }}{% endblock %}
 {% block body %}
 <div class="container">
-    <div class="row">
+    <div class="row col-md-10 col-md-offset-1">
         <div class="comment_box">
-            <h3>Comment for <a href="{% url 'product_comment_list' pk=object.product.pk %}">{{ object.product.name }}</a></h3>
-            <img src="{{ object.photo.url }}" class="pull-left" style="width:20%; "/>
+            <h3>Comment for <a href="{% url 'product_comment_list' pk=object.product.pk %}">{{ object.product.name }}</a>
+                <span class="btn-xs">by {{ object.user.username }}</span>
+            </h3>
+            <img src="{{ object.photo.url }}" class="pull-left"/>
             <div>
-                <h3>{{ object.title |truncatechars:50 }}</h3>
-                <p>{{ object.message }}</p>
+                <h3>{{ object.title }}</h3>
+                <p><i id="p_quote" aria-hidden="true" class="fa fa-quote-left fa-2x"></i>{{ object.message }}</p>
             </div>
+            <span class="timeinfo"><i class="fa fa-clock-o" aria-hidden="true"></i> {{ object.creation_date|date:"d M y H:i" }}</span>
             <div style="clear: both;"></div>
 
         </div>
 
         <div class="like_box">
-            <div style="padding:10px; background:rgba(127, 194, 206, .5);margin-top:1px">
+            <div>
                 <p class="question"><i class="fa fa-question-circle" aria-hidden="true"></i>
-    Bu yorumu faydalı buluyor musunuz?</p>
-                    <span id="like_{{ object.id }}">{{object.like}}</span>
-                <a class="btn" onclick="like(true, {{ object.id }})">
-                    <i class="fa fa-thumbs-o-up fa-2x " aria-hidden="true"></i>
-                </a>&nbsp;
-                <span id="dislike_{{ object.id }}">{{object.dislike}}</span>
-                <a class="btn" onclick="dislike(true, {{ object.id }})">
-                    <i class="fa fa-thumbs-o-down fa-2x " aria-hidden="true"></i>
-                </a>&nbsp;&nbsp;
+    Do you think this comment is helpful?</p>
+                <div class="like_thumb">
+                        <span id="like_{{ object.id }}">{{object.like}}</span>
+                    <a class="btn" onclick="like(true, {{ object.id }})">
+                        <i class="fa fa-thumbs-o-up fa-2x " aria-hidden="true"></i>
+                    </a>&nbsp;
+                </div>
+                <div class="like_thumb">
+                    <span id="dislike_{{ object.id }}">{{object.dislike}}</span>
+                    <a class="btn" onclick="dislike(true, {{ object.id }})">
+                        <i class="fa fa-thumbs-o-down fa-2x " aria-hidden="true"></i>
+                    </a>&nbsp;&nbsp;
+                </div>
             </div>
 
         </div>
