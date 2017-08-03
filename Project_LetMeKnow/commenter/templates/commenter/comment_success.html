@@ -1,12 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "commenter/base.html" %}
+{% block title %} Başarılı yorum eklendi {% endblock %}
+{% block body %}
 <p>Thank you for your participating.
     Your comment has been successfully added.</p>
    <a href="{% url 'home' %}">Homepage</a>
-</body>
-</html>
+{% endblock %}
