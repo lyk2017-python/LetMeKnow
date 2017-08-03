@@ -40,8 +40,9 @@ def dislike(request):
     obj.refresh_from_db()
     return JsonResponse({"dislike": obj.dislike, "id": id})
 
-"""This class lists latest comments and most commented products"""
+
 class HomePageView(generic.ListView):
+    """This class lists latest comments and most commented products"""
     template_name = 'commenter/comment_list.html'
     context_object_name = 'comment_series_list'
     model = Comment
@@ -59,8 +60,8 @@ class HomePageView(generic.ListView):
     def get_queryset(self):
         return Comment.objects.all()
 
-"""This class lists  all comments for a given product"""
 class ProductCommentList(generic.ListView):
+    """This class lists  all comments for a given product"""
     template_name = 'commenter/product_comment_list.html'
     context_object_name = 'product'
     model = Comment
@@ -74,24 +75,28 @@ class ProductCommentList(generic.ListView):
 class SSSView(generic.TemplateView):
     template_name = "commenter/sss.html"
 
-"""This class gives all details of a singe comment"""
+
 class CommentDetailView(generic.DetailView):
+    """This class gives all details of a singe comment"""
     model = Comment
 
-"""This class creates new comment"""
+
 class CommentView(LoginCreateView):
+    """This class creates new comment"""
     form_class = CommentForm
     template_name = "commenter/comment_create.html"
     success_url = "./success/"
 
-"""This clas creates ne product"""
+
 class ProductView(generic.CreateView):
+    """This clas creates ne product"""
     form_class = ProductForm
     template_name = "commenter/product_create.html"
     success_url = "./success"
 
-"""This class creates contact message and writes it to disk"""
+
 class ContactFormView(generic.FormView):
+    """This class creates contact message and writes it to disk"""
     form_class = ContactForm
     template_name = "commenter/contact.html"
     success_url = "/"
@@ -121,6 +126,7 @@ def product_success(request):
     return render(request, 'commenter/product_success.html')
 
 class RegistrationView(generic.FormView):
+    """This class enables user signup"""
     form_class = CustomUserCreationForm
     template_name = "commenter/signup.html"
     success_url = "/"
