@@ -25,7 +25,22 @@
 
                 {% endfor %}
 
-            </div>
+        </div>
+
+         <div>
+
+             <form id="searchform" action="{% url 'list-search' %}" method="get" accept-charset="utf-8">
+                    <i class="fa fa-search"></i>
+                  <input class="searchfield" id="searchbox" name="q" type="text" placeholder="Search for reviews or products">
+            </form>
+
+
+        </div>
+
+
+
+
+
     </div>
     </div>
 {% endblock %}

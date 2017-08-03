@@ -1,6 +1,6 @@
 from django.conf.urls import url
 from commenter.views import HomePageView, CommentDetailView, SSSView, ContactFormView, CommentView, ProductView, \
-    comment_success, product_success, ProductCommentList, like, dislike, RegistrationView
+    comment_success, product_success, ProductCommentList, like, dislike, RegistrationView,SearchView
 
 appname = 'commenter'
 
@@ -18,5 +18,6 @@ urlpatterns = [
     url(r"^api/like$", like, name="like_dislike"),
     url(r"^api/dislike$", dislike, name="dislike"),
     url(r"^signup$", RegistrationView.as_view(), name="register"),
+    url(r'^search/$', SearchView.as_view(), name='list-search'),
 ]
 
