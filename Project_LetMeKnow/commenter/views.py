@@ -128,3 +128,19 @@ class RegistrationView(generic.FormView):
     def form_valid(self, form):
         form.save()
         return super().form_valid(form)
+
+
+
+
+class SearchView(HomePageView):
+    paginate_by = 10
+
+    def get_queryset(self):
+        result = super(HomePageView, self).get_queryset()
+
+        query = self.request.GET.get('q')
+        if query:
+
+            result = result.filter(name__icontains=query)
+
+        return result
