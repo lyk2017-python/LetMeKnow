@@ -1,0 +1,11 @@
+{% extends "commenter/base.html" %}
+{% block title %}Homepage{% endblock %}
+{% block body %}
+
+    {% for query_result in search_object %}
+
+        {{ query_result.title }}<span> - </span>
+        {{ query_result.product }}</br>
+    {% endfor %}
+
+{% endblock %}

@@ -5,7 +5,7 @@ from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
 from commenter.forms import ContactForm, CommentForm, ProductForm, CustomUserCreationForm
 from commenter.models import *
-from django.db.models import F, Count
+from django.db.models import F
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 
@@ -51,7 +51,8 @@ class HomePageView(generic.ListView):
         context = super(HomePageView, self).get_context_data(**kwargs)
         context.update(
             {
-                'product_series_list': Comment.objects.values("product__name","product__id").annotate(toplam = Count("product", distinct=True))
+                'product_series_list':Product.objects.order_by('name'),
+
             }
         )
         return context
@@ -138,3 +139,18 @@ class RegistrationView(generic.FormView):
     def form_valid(self, form):
         form.save()
         return super().form_valid(form)
+
+
+
+
+class SearchView(HomePageView):
+    """Sadece ürün adıyla arama yapan sınıf"""
+    template_name = 'commenter/search_list.html'
+    context_object_name = 'search_object'
+    model = Comment, Product
+
+
+    def get_queryset(self):
+        qs = super(SearchView, self).get_queryset()
+        query = self.request.GET.get('keyword', "")
+        return qs.filter(product__name__icontains=query)
