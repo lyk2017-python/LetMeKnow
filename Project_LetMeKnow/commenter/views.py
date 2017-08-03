@@ -1,3 +1,6 @@
+from functools import reduce
+
+from django.contrib.postgres.search import SearchVector
 from django.core.mail import send_mail
 from django.http import Http404, request, HttpResponse, JsonResponse
 from django.shortcuts import render, get_object_or_404
@@ -8,6 +11,8 @@ from commenter.models import *
 from django.db.models import F
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
+import operator
+from django.db.models import Q
 
 
 
@@ -69,8 +74,6 @@ class ProductCommentList(generic.ListView):
     def get_queryset(self):
         qs = super(ProductCommentList, self).get_queryset()
         return qs.filter(product_id = self.kwargs['pk'])
-
-
 
 class SSSView(generic.TemplateView):
     template_name = "commenter/sss.html"
@@ -139,14 +142,35 @@ class RegistrationView(generic.FormView):
 
 
 class SearchView(HomePageView):
+
+    template_name = 'commenter/search_list.html'
+    context_object_name = 'search_object'
+    model = Comment, Product
+
+
+    def get_queryset(self):
+        qs = super(SearchView, self).get_queryset()
+        query = self.request.GET.get('keyword', "")
+        return qs.filter(product__name__icontains=query)
+        #return Comment.objects.annotate(search = SearchVector('product__name', 'comment_title'),).\
+            #filter(search=query)
+    """
+        Display a Blog List page filtered by the search query.
+  
     paginate_by = 10
 
     def get_queryset(self):
-        result = super(HomePageView, self).get_queryset()
+        result = super(SearchView, self).get_queryset()
 
         query = self.request.GET.get('q')
         if query:
-
-            result = result.filter(name__icontains=query)
+            query_list = query.split()
+            result = result.filter(
+                reduce(operator.and_,
+                       (Q(product__name=q) for q in query_list)) |
+                reduce(operator.and_,
+                       (Q(comment__title=q) for q in query_list))
+            )
 
         return result
+    """
