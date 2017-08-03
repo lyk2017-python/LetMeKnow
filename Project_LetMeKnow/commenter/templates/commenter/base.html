@@ -1,4 +1,4 @@
-{% load static %}
+{% load static bootstrap3 gravatar%}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,6 +26,7 @@
             <ul id="lava_menu" class="lavaLampWithImage">
                 <li><a href="/"><i class="fa fa-home fa-fw" aria-hidden="true"></i>Homepage</a></li>
                 {% if request.user.is_authenticated %}
+
                     <li><a href=""><i class="fa fa-user-circle fa-fw" aria-hidden="true"></i>{{ request.user.username }}</a></li>
                     <li><a href="{% url 'logout' %}"><i class="fa fa-sign-out fa-fw" aria-hidden="true"></i>Logout</a></li>
                     <li><a href="{% url 'commentform' %}"><i class="fa fa-comments fa-fw" aria-hidden="true"></i>Comment</a></li>

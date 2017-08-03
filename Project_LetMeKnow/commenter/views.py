@@ -1,3 +1,6 @@
+from functools import reduce
+
+from django.contrib.postgres.search import SearchVector
 from django.core.mail import send_mail
 from django.http import Http404, request, HttpResponse, JsonResponse
 from django.shortcuts import render, get_object_or_404
@@ -8,6 +11,8 @@ from commenter.models import *
 from django.db.models import F
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
+import operator
+from django.db.models import Q
 
 
 
@@ -27,7 +32,6 @@ def like(request):
     obj.refresh_from_db()
     return JsonResponse({"like": obj.like, "id": id})
 
-
 def dislike(request):
     id = request.POST.get("id", default=None)
     dislike = request.POST.get("dislike")
@@ -41,8 +45,9 @@ def dislike(request):
     obj.refresh_from_db()
     return JsonResponse({"dislike": obj.dislike, "id": id})
 
-"""This class lists latest comments and most commented products"""
+
 class HomePageView(generic.ListView):
+    """This class lists latest comments and most commented products"""
     template_name = 'commenter/comment_list.html'
     context_object_name = 'comment_series_list'
     model = Comment
@@ -60,8 +65,8 @@ class HomePageView(generic.ListView):
     def get_queryset(self):
         return Comment.objects.all()
 
-"""This class lists  all comments for a given product"""
 class ProductCommentList(generic.ListView):
+    """This class lists  all comments for a given product"""
     template_name = 'commenter/product_comment_list.html'
     context_object_name = 'product'
     model = Comment
@@ -70,17 +75,17 @@ class ProductCommentList(generic.ListView):
         qs = super(ProductCommentList, self).get_queryset()
         return qs.filter(product_id = self.kwargs['pk'])
 
-
-
 class SSSView(generic.TemplateView):
     template_name = "commenter/sss.html"
 
-"""This class gives all details of a singe comment"""
+
 class CommentDetailView(generic.DetailView):
+    """This class gives all details of a singe comment"""
     model = Comment
 
-"""This class creates new comment"""
+
 class CommentView(LoginCreateView):
+    """This class creates new comment"""
     form_class = CommentForm
     template_name = "commenter/comment_create.html"
     success_url = "./success/"
@@ -89,15 +94,15 @@ class CommentView(LoginCreateView):
         form.instance.user = self.request.user
         return super(LoginCreateView, self).form_valid(form)
 
-
-"""This class creates new product"""
 class ProductView(generic.CreateView):
+    """This clas creates ne product"""
     form_class = ProductForm
     template_name = "commenter/product_create.html"
     success_url = "./success"
 
-"""This class creates contact message and writes it to disk"""
+
 class ContactFormView(generic.FormView):
+    """This class creates contact message and writes it to disk"""
     form_class = ContactForm
     template_name = "commenter/contact.html"
     success_url = "/"
@@ -132,6 +137,7 @@ def signup_success(request):
 
 
 class RegistrationView(generic.FormView):
+    """This class enables user signup"""
     form_class = CustomUserCreationForm
     template_name = "commenter/signup.html"
     success_url = "./success/"
@@ -153,4 +159,5 @@ class SearchView(HomePageView):
     def get_queryset(self):
         qs = super(SearchView, self).get_queryset()
         query = self.request.GET.get('keyword', "")
-        return qs.filter(product__name__icontains=query)
+        #return qs.filter(product__name__icontains=query)
+        return qs.filter(Q(product__name__icontains=query) | Q(title__icontains=query) | Q(message__icontains=query))

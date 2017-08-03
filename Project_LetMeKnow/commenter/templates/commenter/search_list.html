@@ -2,10 +2,24 @@
 {% block title %}Homepage{% endblock %}
 {% block body %}
 
-    {% for query_result in search_object %}
+<div class="container">
 
-        {{ query_result.title }}<span> - </span>
-        {{ query_result.product }}</br>
-    {% endfor %}
+    <div class="row"><h2>{{ search_object.keyword }} için sonuç</h2></div>
+
+    {% for query_result in search_object %}
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+           <p><a href=" {% url 'commentdetails' pk=query_result.pk %}"> {{ query_result.title }}</a>
+            <span> - </span>
+            {{ query_result.product }}</p>
+            </div>
+        <div class="col-md-3"></div>
+    </div>
+
+
+           {% endfor %}
+
+</div>
 
 {% endblock %}
