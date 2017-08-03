@@ -167,13 +167,25 @@ a:hover{
 }
 a:active{
 }
-
+html {
+  position: relative;
+  min-height: 100%;
+}
 body{
     font-family:"Lato","Helvetica Neue","Helvetica",Helvetica,Arial,sans-serif;
     margin-top:170px;
     background-color: rgba(47, 141, 157, 0.1);
+    margin-bottom:60px;
 }
 
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background-color: #f5f5f5;
+}
 .color1{
 color:#bee5ec;
 }
