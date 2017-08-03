@@ -142,7 +142,7 @@ class RegistrationView(generic.FormView):
 
 
 class SearchView(HomePageView):
-
+    """Sadece ürün adıyla arama yapan sınıf"""
     template_name = 'commenter/search_list.html'
     context_object_name = 'search_object'
     model = Comment, Product
@@ -152,25 +152,3 @@ class SearchView(HomePageView):
         qs = super(SearchView, self).get_queryset()
         query = self.request.GET.get('keyword', "")
         return qs.filter(product__name__icontains=query)
-        #return Comment.objects.annotate(search = SearchVector('product__name', 'comment_title'),).\
-            #filter(search=query)
-    """
-        Display a Blog List page filtered by the search query.
-  
-    paginate_by = 10
-
-    def get_queryset(self):
-        result = super(SearchView, self).get_queryset()
-
-        query = self.request.GET.get('q')
-        if query:
-            query_list = query.split()
-            result = result.filter(
-                reduce(operator.and_,
-                       (Q(product__name=q) for q in query_list)) |
-                reduce(operator.and_,
-                       (Q(comment__title=q) for q in query_list))
-            )
-
-        return result
-    """
