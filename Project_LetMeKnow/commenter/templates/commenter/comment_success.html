@@ -1,7 +1,14 @@
 {% extends "commenter/base.html" %}
-{% block title %} Başarılı yorum eklendi {% endblock %}
+{% block title %} Comment Success! {% endblock %}
 {% block body %}
-<p>Thank you for your participating.
-    Your comment has been successfully added.</p>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+                <h4>Thank you for your participating.
+    Your comment has been successfully added.</h4>
    <a href="{% url 'home' %}">Homepage</a>
+        </div>
+    </div>
+</div>
+
 {% endblock %}

@@ -2,43 +2,46 @@
 {% block title %} {{ product.name }} {% endblock %}
 {% block body %}
 
-
 {% for comments in product %}
-<div class="container">
-    <div class="row">
-        <div class="comment-container" style=" margin:20px; padding:20px;">
-
-            <div style="background:#e0e0c0; padding:10px">
-
-                <img src="{{ comments.photo.url }}" style="width:50%; float:left; margin:10px"/>
-                <h3 class="pull-right">{{ comments.product }} - {{ comments.title }}</h3>
-                <p>{{ comments.message }}</p>
-
+<div class="container" style="margin-bottom:30px;">
+    <div class="row col-md-10 col-md-offset-1">
+        <div class="comment_box">
+            <h3>Comment for <a href="{% url 'product_comment_list' pk=comments.product_id %}">{{ comments.product.name }}</a>
+                <span class="btn-xs">by {{ comments.user.username }}</span>
+            </h3>
+            <img src="{{ comments.photo.url }}" class="pull-left"/>
+            <div>
+                <h3>{{ comments.title }}</h3>
+                <p><i id="p_quote" aria-hidden="true" class="fa fa-quote-left fa-2x"></i>{{ comments.message }}</p>
             </div>
+            <span class="timeinfo">
+                <i class="fa fa-clock-o" aria-hidden="true"></i> {{ comments.creation_date|date:"d M y H:i" }}</span>
+            <div style="clear: both;"></div>
+
+        </div>
+
+        <div class="like_box">
+            <div>
+                <p class="question"><i class="fa fa-question-circle" aria-hidden="true"></i>
+    Do you think this comment is helpful?</p>
+                <div class="like_thumb">
+                        <span id="like_{{ comments.id }}">{{comments.like}}</span>
+                    <a class="btn" onclick="like(true, {{ comments.id }})">
+                        <i class="fa fa-thumbs-o-up fa-2x " aria-hidden="true"></i>
+                    </a>&nbsp;
+                </div>
+                <div class="like_thumb">
+                    <span id="dislike_{{ comments.id }}">{{comments.dislike}}</span>
+                    <a class="btn" onclick="dislike(true, {{ comments.id }})">
+                        <i class="fa fa-thumbs-o-down fa-2x " aria-hidden="true"></i>
+                    </a>&nbsp;&nbsp;
+                </div>
+            </div>
+
         </div>
     </div>
+
 </div>
-
-<div class="container">
-    <div class="row">
-        <b> <p style="color:#660000 ">Bu yorumu faydalı buluyor musunuz?</p> </b>
-        <span id="like_{{ comments.id }}">{{comments.like}}</span>
-        <a onclick="like(true, {{ comments.id }})">
-           <i class="fa fa-thumbs-o-up fa-2x " style="color: #660000" aria-hidden="true"></i>
-
-
-
-        </a>&nbsp;&nbsp;
-        <span id="dislike_{{ comments.id }}">{{comments.dislike}}</span>
-        <a onclick="dislike(true, {{ comments.id }})">
-           <i class="fa fa-thumbs-o-down fa-2x" style="color: #660000" aria-hidden="true"></i>
-
-
-
-        </a>
-    </div>
-</div>
-
 {% endfor %}
 
 
