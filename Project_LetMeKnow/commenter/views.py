@@ -147,10 +147,8 @@ class RegistrationView(generic.FormView):
         return super().form_valid(form)
 
 
-
-
 class SearchView(HomePageView):
-    """Sadece ürün adıyla arama yapan sınıf"""
+    """This class lets user search in database restricted just three columns comment title, content and product name"""
     template_name = 'commenter/search_list.html'
     context_object_name = 'search_object'
     model = Comment, Product
@@ -161,3 +159,14 @@ class SearchView(HomePageView):
         query = self.request.GET.get('keyword', "")
         #return qs.filter(product__name__icontains=query)
         return qs.filter(Q(product__name__icontains=query) | Q(title__icontains=query) | Q(message__icontains=query))
+
+    def get_context_data(self, **kwargs):
+        context = super(SearchView, self).get_context_data(**kwargs)
+        query = self.request.GET.get('keyword', "")
+        context.update(
+                {
+                    'search_keyword':query,
+
+                }
+            )
+        return context
