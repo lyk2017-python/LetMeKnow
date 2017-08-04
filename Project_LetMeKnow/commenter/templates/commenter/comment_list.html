@@ -18,18 +18,15 @@
         <div class="col-md-3"></div>
     </div>
     <div class="row">
-        <div class="col-md-6">
-
+        <div class="col-md-5 col-md-offset-1">
             <h2>Last Comments</h2>
 
             {% for obj in comment_series_list %}
             <p><a href=" {% url 'commentdetails' pk=obj.pk %}"> {{ obj.title }}</a>
                 <span>{{ obj.creation_date|date:"d M y H:i" }}</span></h1></p>
             {% endfor %}
-
-
         </div>
-        <div class="col-md-6">
+        <div class="col-md-5 col-md-offset-1">
             <h2>Commented Products</h2>
                 {% for prd in product_series_list %}
                 <p><a href=" {% url 'product_comment_list' pk=prd.pk %}"> {{ prd.name }} </a></p>
