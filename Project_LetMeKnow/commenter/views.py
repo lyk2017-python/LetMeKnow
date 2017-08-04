@@ -20,6 +20,7 @@ class LoginCreateView(LoginRequiredMixin, generic.CreateView):
     pass
 
 def like(request):
+    """This function enables comment liking"""
     id = request.POST.get("id", default=None)
     like = request.POST.get("like")
     obj = get_object_or_404(Comment, id=int(id))
@@ -33,6 +34,7 @@ def like(request):
     return JsonResponse({"like": obj.like, "id": id})
 
 def dislike(request):
+    """This function enables disliking"""
     id = request.POST.get("id", default=None)
     dislike = request.POST.get("dislike")
     obj = get_object_or_404(Comment, id=int(id))
@@ -148,19 +150,22 @@ class RegistrationView(generic.FormView):
 
 
 class SearchView(HomePageView):
-    """This class lets user search in database restricted just three columns comment title, content and product name"""
+    """This class lets user search in database restricted just three columns comment title,
+    content and product name. Shows results via search_list.html template"""
     template_name = 'commenter/search_list.html'
     context_object_name = 'search_object'
     model = Comment, Product
 
 
     def get_queryset(self):
+        """This method gets search keyword form search bar and retuns query set which contains
+        search keywords"""
         qs = super(SearchView, self).get_queryset()
         query = self.request.GET.get('keyword', "")
-        #return qs.filter(product__name__icontains=query)
         return qs.filter(Q(product__name__icontains=query) | Q(title__icontains=query) | Q(message__icontains=query))
 
     def get_context_data(self, **kwargs):
+        """This method just takes search keyword and shows at top of search results"""
         context = super(SearchView, self).get_context_data(**kwargs)
         query = self.request.GET.get('keyword', "")
         context.update(
